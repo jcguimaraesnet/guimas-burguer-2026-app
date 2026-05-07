@@ -14,7 +14,9 @@
             <div class="card-body">
                 <h5 class="card-title">@item.Nome</h5>
                 <p class="card-text">@item.Descricao</p>
-                <a class="btn btn-primary">Ver mais</a>
+                <a class="btn btn-primary"
+                   asp-page="/Details"
+                   asp-route-id="@item.HamburguerId">Ver mais</a>
             </div>
         </div>
     }
