@@ -16,6 +16,7 @@
                 <p class="card-text">@item.Descricao</p>
                 <a class="btn btn-primary"
                    asp-page="/Details"
+                   asp-route-slug="@item.Nome"
                    asp-route-id="@item.HamburguerId">Ver mais</a>
             </div>
         </div>
