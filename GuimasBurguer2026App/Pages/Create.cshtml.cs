@@ -7,6 +7,7 @@ namespace GuimasBurguer2026App.Pages
 {
     public class CreateModel : PageModel
     {
+        [BindProperty]
         public Hamburguer Hamburguer { get; set; }
 
         private IHamburguerService _service;
@@ -16,8 +17,11 @@ namespace GuimasBurguer2026App.Pages
             _service = service;
         }
 
-        public void OnGet()
+        public IActionResult OnPost()
         {
+            _service.Incluir(Hamburguer);
+
+            return RedirectToPage("/Index");
         }
     }
 }

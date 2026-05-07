@@ -57,4 +57,11 @@ public class HamburguerService : IHamburguerService
                 },
             };
     }
+
+    public void Incluir(Hamburguer hamburguer)
+    {
+        var proximoNumero = _hamburguers.Max(item => item.HamburguerId) + 1;
+        hamburguer.HamburguerId = proximoNumero;
+        _hamburguers.Add(hamburguer);
+    }
 }

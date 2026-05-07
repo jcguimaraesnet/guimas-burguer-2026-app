@@ -6,5 +6,6 @@ namespace GuimasBurguer2026App.Services
     {
         IList<Hamburguer> ObterTodos();
         Hamburguer Obter(int id);
+        void Incluir(Hamburguer hamburguer);
     }
 }
