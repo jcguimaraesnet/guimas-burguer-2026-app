@@ -2,7 +2,7 @@
 
 namespace GuimasBurguer2026App.Services;
 
-public class HamburguerService
+public class HamburguerService : IHamburguerService
 {
     private IList<Hamburguer> _hamburguers;
 

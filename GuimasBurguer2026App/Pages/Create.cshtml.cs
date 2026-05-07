@@ -5,20 +5,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GuimasBurguer2026App.Pages
 {
-    public class DetailsModel : PageModel
+    public class CreateModel : PageModel
     {
         public Hamburguer Hamburguer { get; set; }
+
         private IHamburguerService _service;
 
-        public DetailsModel(IHamburguerService service)
+        public CreateModel(IHamburguerService service)
         {
             _service = service;
         }
 
-
-        public void OnGet(int id)
+        public void OnGet()
         {
-            Hamburguer = _service.Obter(id);
         }
     }
 }

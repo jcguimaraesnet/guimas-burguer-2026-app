@@ -1,3 +1,5 @@
+using GuimasBurguer2026App.Services;
+
 namespace GuimasBurguer2026App
 {
     public class Program
@@ -8,6 +10,8 @@ namespace GuimasBurguer2026App
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddSingleton<IHamburguerService, HamburguerService>();
 
             var app = builder.Build();
 
