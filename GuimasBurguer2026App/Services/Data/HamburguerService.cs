@@ -14,12 +14,23 @@ public class HamburguerService : IHamburguerService
 
     public void Alterar(Hamburguer hamburguer)
     {
-        throw new NotImplementedException();
+        var hamburguerExistente = Obter(hamburguer.HamburguerId);
+        hamburguerExistente.Nome = hamburguer.Nome;
+        hamburguerExistente.Descricao = hamburguer.Descricao;
+        hamburguerExistente.Preco = hamburguer.Preco;
+        hamburguerExistente.EntregaExpressa = hamburguer.EntregaExpressa;
+        hamburguerExistente.DataCadastro = hamburguer.DataCadastro;
+        hamburguerExistente.ImagemUri = hamburguer.ImagemUri;
+
+        _context.SaveChanges();
     }
 
     public void Excluir(int id)
     {
-        throw new NotImplementedException();
+        var hamburguerExistente = Obter(id);
+        _context.Hamburguer.Remove(hamburguerExistente);
+
+        _context.SaveChanges();
     }
 
     public void Incluir(Hamburguer hamburguer)
