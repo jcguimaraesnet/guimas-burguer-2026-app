@@ -19,8 +19,6 @@ namespace GuimasBurguer2026App.Pages
 
         public void OnGet()
         {
-            //var service = new HamburguerMemoryService();
-            //var service = new HamburguerDatabaseService();
             Hamburguers = _service.ObterTodos();
         }
     }

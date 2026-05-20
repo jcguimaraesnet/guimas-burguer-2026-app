@@ -1,4 +1,6 @@
+using GuimasBurguer2026App.Data;
 using GuimasBurguer2026App.Services;
+using GuimasBurguer2026App.Services.Memory;
 
 namespace GuimasBurguer2026App
 {
@@ -11,7 +13,9 @@ namespace GuimasBurguer2026App
             // Add services to the container.
             builder.Services.AddRazorPages();
 
-            builder.Services.AddSingleton<IHamburguerService, HamburguerService>();
+            builder.Services.AddTransient<IHamburguerService, Services.Data.HamburguerService>();
+            //builder.Services.AddSingleton<IHamburguerService, Services.Memory.HamburguerService>();
+            builder.Services.AddDbContext<HamburguerDbContext>();
 
             var app = builder.Build();
 

@@ -1,6 +1,6 @@
 ﻿using GuimasBurguer2026App.Models;
 
-namespace GuimasBurguer2026App.Services;
+namespace GuimasBurguer2026App.Services.Memory;
 
 public class HamburguerService : IHamburguerService
 {
