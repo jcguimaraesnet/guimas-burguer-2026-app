@@ -9,6 +9,7 @@ namespace GuimasBurguer2026App.Pages
     {
         public Hamburguer Hamburguer { get; set; }
         private IHamburguerService _service;
+        public Marca Marca { get; set; }
 
         public DetailsModel(IHamburguerService service)
         {
@@ -19,6 +20,8 @@ namespace GuimasBurguer2026App.Pages
         public void OnGet(int id)
         {
             Hamburguer = _service.Obter(id);
+            Marca = _service.ObterTodasMarcas()
+                .SingleOrDefault(item => item.MarcaId == Hamburguer.MarcaId);
         }
     }
 }

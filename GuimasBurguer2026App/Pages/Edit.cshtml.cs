@@ -2,6 +2,7 @@ using GuimasBurguer2026App.Models;
 using GuimasBurguer2026App.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GuimasBurguer2026App.Pages
 {
@@ -9,6 +10,8 @@ namespace GuimasBurguer2026App.Pages
     {
         [BindProperty]
         public Hamburguer Hamburguer { get; set; }
+        public SelectList MarcaOptionItems { get; set; }
+
 
         private IHamburguerService _service;
 
@@ -20,6 +23,10 @@ namespace GuimasBurguer2026App.Pages
         public void OnGet(int id)
         {
             Hamburguer = _service.Obter(id);
+
+            MarcaOptionItems = new SelectList(_service.ObterTodasMarcas(),
+                                                nameof(Marca.MarcaId),
+                                                nameof(Marca.Nome));
         }
 
         public IActionResult OnPost()
