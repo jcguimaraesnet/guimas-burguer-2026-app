@@ -21,6 +21,7 @@ public class HamburguerService : IHamburguerService
         hamburguerExistente.EntregaExpressa = hamburguer.EntregaExpressa;
         hamburguerExistente.DataCadastro = hamburguer.DataCadastro;
         hamburguerExistente.ImagemUri = hamburguer.ImagemUri;
+        hamburguerExistente.MarcaId = hamburguer.MarcaId;
 
         _context.SaveChanges();
     }
@@ -43,6 +44,11 @@ public class HamburguerService : IHamburguerService
     {
         return _context.Hamburguer
             .SingleOrDefault(item => item.HamburguerId == id);
+    }
+
+    public IList<Marca> ObterTodasMarcas()
+    {
+        return _context.Marca.ToList();
     }
 
     public IList<Hamburguer> ObterTodos()

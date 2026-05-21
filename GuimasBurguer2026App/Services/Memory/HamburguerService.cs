@@ -82,4 +82,9 @@ public class HamburguerService : IHamburguerService
         _hamburguers.Remove(hamburguerExistente);
 
     }
+
+    public IList<Marca> ObterTodasMarcas()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -6,6 +6,7 @@ namespace GuimasBurguer2026App.Data
     public class HamburguerDbContext : DbContext
     {
         public DbSet<Hamburguer> Hamburguer { get; set; }
+        public DbSet<Marca> Marca { get; set; }
 
         protected override void OnConfiguring
         (

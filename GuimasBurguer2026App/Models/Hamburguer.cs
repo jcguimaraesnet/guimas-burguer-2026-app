@@ -34,5 +34,8 @@ namespace GuimasBurguer2026App.Models
         [DataType("month")]
         [DisplayFormat(DataFormatString = "{0:D}")]
         public DateTime DataCadastro { get; set; }
+
+        [Display(Name = "Marca")]
+        public int? MarcaId { get; set; }
     }
 }

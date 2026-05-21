@@ -4,6 +4,7 @@ using GuimasBurguer2026App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuimasBurguer2026App.Data.Migrations
 {
     [DbContext(typeof(HamburguerDbContext))]
-    partial class HamburguerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260521104909_AddTableMarca")]
+    partial class AddTableMarca
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +47,6 @@ namespace GuimasBurguer2026App.Data.Migrations
                     b.Property<string>("ImagemUri")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("MarcaId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
