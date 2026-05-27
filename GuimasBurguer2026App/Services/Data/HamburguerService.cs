@@ -41,6 +41,11 @@ public class HamburguerService : IHamburguerService
         _context.SaveChanges();
     }
 
+    public void Salvar()
+    {
+        _context.SaveChanges();
+    }
+
     public Hamburguer Obter(int id)
     {
         return _context.Hamburguer

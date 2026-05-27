@@ -82,6 +82,11 @@ public class HamburguerService : IHamburguerService
         _hamburguers.Add(hamburguer);
     }
 
+    public void Salvar()
+    {
+        // sem persistência: dados já vivem em memória
+    }
+
     public void Alterar(Hamburguer hamburguerAlterado)
     {
         var hamburguerExistente = Obter(hamburguerAlterado.HamburguerId);

@@ -9,6 +9,7 @@ namespace GuimasBurguer2026App.Services
         Hamburguer Obter(int id);
         void Incluir(Hamburguer hamburguer);
         void Alterar(Hamburguer hamburguer);
+        void Salvar();
         void Excluir(int id);
         IList<Marca> ObterTodasMarcas();
     }

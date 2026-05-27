@@ -8,7 +8,6 @@ namespace GuimasBurguer2026App.Pages
 {
     public class EditModel : PageModel
     {
-        [BindProperty]
         public Hamburguer Hamburguer { get; set; }
         public SelectList MarcaOptionItems { get; set; }
 
@@ -24,29 +23,44 @@ namespace GuimasBurguer2026App.Pages
         {
             Hamburguer = _service.Obter(id);
 
-            MarcaOptionItems = new SelectList(_service.ObterTodasMarcas(),
-                                                nameof(Marca.MarcaId),
-                                                nameof(Marca.Nome));
+            CarregarMarcas();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            Hamburguer = _service.Obter(id);
+            if (Hamburguer == null) return NotFound();
+
+            if (await TryUpdateModelAsync(Hamburguer, nameof(Hamburguer),
+                    h => h.Nome,
+                    h => h.Descricao,
+                    h => h.Preco,
+                    h => h.EntregaExpressa,
+                    h => h.DataCadastro,
+                    h => h.ImagemUri,
+                    h => h.MarcaId))
             {
-                return Page();
+                _service.Salvar();
+                return RedirectToPage("/Index");
             }
 
-            _service.Alterar(Hamburguer);
-
-            return RedirectToPage("/Index");
+            CarregarMarcas();
+            return Page();
         }
 
-        public IActionResult OnPostDelete()
+        public IActionResult OnPostDelete(int id)
         {
             TempData["TempMensagemSucesso"] = true;
 
-            _service.Excluir(Hamburguer.HamburguerId);
+            _service.Excluir(id);
             return RedirectToPage("/Index");
+        }
+
+        private void CarregarMarcas()
+        {
+            MarcaOptionItems = new SelectList(_service.ObterTodasMarcas(),
+                                                nameof(Marca.MarcaId),
+                                                nameof(Marca.Nome));
         }
     }
 }
