@@ -87,4 +87,9 @@ public class HamburguerService : IHamburguerService
     {
         throw new NotImplementedException();
     }
+
+    public IList<Hamburguer> ObterComFiltro(string nome, string descricao)
+    {
+        throw new NotImplementedException();
+    }
 }

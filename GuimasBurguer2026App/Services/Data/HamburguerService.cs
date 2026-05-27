@@ -1,5 +1,6 @@
 ﻿using GuimasBurguer2026App.Data;
 using GuimasBurguer2026App.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GuimasBurguer2026App.Services.Data;
 
@@ -44,6 +45,29 @@ public class HamburguerService : IHamburguerService
     {
         return _context.Hamburguer
             .SingleOrDefault(item => item.HamburguerId == id);
+    }
+
+    public IList<Hamburguer> ObterComFiltro(string nome, string descricao)
+    {
+        IQueryable<Hamburguer> query = _context.Hamburguer;
+
+        if (!string.IsNullOrEmpty(nome))
+        {
+            query = query.Where(h =>
+            EF.Functions.Collate(h.Nome, "Latin1_General_CI_AI")
+            .Contains(nome));
+        }
+
+        if (!string.IsNullOrEmpty(descricao))
+        {
+            query = query.Where(h =>
+                EF.Functions.Collate(h.Descricao,
+                     "Latin1_General_CI_AI")
+                     .Contains(descricao));
+        }
+
+        return query.ToList();
+
     }
 
     public IList<Marca> ObterTodasMarcas()
