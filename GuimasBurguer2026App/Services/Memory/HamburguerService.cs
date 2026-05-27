@@ -16,6 +16,23 @@ public class HamburguerService : IHamburguerService
         return _hamburguers;
     }
 
+    public IList<Hamburguer> ObterPorNome(string nome, string descricao)
+    {
+        IEnumerable<Hamburguer> query = _hamburguers;
+
+        if (!string.IsNullOrEmpty(nome))
+        {
+            query = query.Where(h => h.Nome.Contains(nome, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrEmpty(descricao))
+        {
+            query = query.Where(h => h.Descricao.Contains(descricao, StringComparison.OrdinalIgnoreCase));
+        }
+
+        return query.ToList();
+    }
+
     public Hamburguer Obter(int id)
     {
         return _hamburguers.Single(item => item.HamburguerId == id);
