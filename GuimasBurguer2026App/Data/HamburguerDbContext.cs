@@ -1,4 +1,5 @@
-﻿using GuimasBurguer2026App.Models;
+﻿using GuimasBurguer2026App.Data.Configurations;
+using GuimasBurguer2026App.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuimasBurguer2026App.Data
@@ -21,6 +22,18 @@ namespace GuimasBurguer2026App.Data
             string conn = config.GetConnectionString("MyDb");
 
             optionsBuilder.UseSqlServer(conn);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            //modelBuilder.ApplyConfiguration(new HamburguerConfiguration());
+
+            //busca classes que implementam IEntityTypeConfiguration
+            modelBuilder.ApplyConfigurationsFromAssembly
+                           (typeof(HamburguerDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
         }
 
     }
