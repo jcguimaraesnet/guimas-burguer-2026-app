@@ -21,7 +21,7 @@ public class HamburguerDbContext : DbContext
 
         string conn = config.GetConnectionString("MyDb");
 
-        optionsBuilder.UseSqlServer(conn);
+        optionsBuilder.UseSqlite(conn);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

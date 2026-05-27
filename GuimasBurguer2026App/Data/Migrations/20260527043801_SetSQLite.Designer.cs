@@ -3,7 +3,6 @@ using System;
 using GuimasBurguer2026App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,55 +11,49 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuimasBurguer2026App.Data.Migrations
 {
     [DbContext(typeof(HamburguerDbContext))]
-    [Migration("20260527025541_AddEntregaExpressionConversion")]
-    partial class AddEntregaExpressionConversion
+    [Migration("20260527043801_SetSQLite")]
+    partial class SetSQLite
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.16")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.16");
 
             modelBuilder.Entity("GuimasBurguer2026App.Models.Hamburguer", b =>
                 {
                     b.Property<int>("HamburguerId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HamburguerId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("TEXT")
                         .HasColumnName("DataCadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("EntregaExpressa")
-                        .HasColumnType("int")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("EntregaExpressa");
 
                     b.Property<string>("ImagemUri")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("MarcaId")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("TEXT")
                         .HasColumnName("Nome");
 
                     b.Property<double>("Preco")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("HamburguerId");
 
@@ -71,17 +64,28 @@ namespace GuimasBurguer2026App.Data.Migrations
                 {
                     b.Property<int>("MarcaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MarcaId"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Nome");
 
                     b.HasKey("MarcaId");
 
                     b.ToTable("Marca");
+
+                    b.HasData(
+                        new
+                        {
+                            MarcaId = 1,
+                            Nome = "Sadia"
+                        },
+                        new
+                        {
+                            MarcaId = 2,
+                            Nome = "Seara"
+                        });
                 });
 #pragma warning restore 612, 618
         }
