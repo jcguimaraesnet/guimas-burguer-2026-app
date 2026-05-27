@@ -1,27 +1,36 @@
-﻿using GuimasBurguer2026App.Models;
+﻿using GuimasBurguer2026App.Data.Configurations;
+using GuimasBurguer2026App.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GuimasBurguer2026App.Data
+namespace GuimasBurguer2026App.Data;
+
+public class HamburguerDbContext : DbContext
 {
-    public class HamburguerDbContext : DbContext
+    public DbSet<Hamburguer> Hamburguer { get; set; }
+    public DbSet<Marca> Marca { get; set; }
+
+    protected override void OnConfiguring
+    (
+        DbContextOptionsBuilder optionsBuilder
+    )
     {
-        public DbSet<Hamburguer> Hamburguer { get; set; }
-        public DbSet<Marca> Marca { get; set; }
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-        protected override void OnConfiguring
-        (
-            DbContextOptionsBuilder optionsBuilder
-        )
-        {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+        string conn = config.GetConnectionString("MyDb");
 
-            string conn = config.GetConnectionString("MyDb");
-
-            optionsBuilder.UseSqlServer(conn);
-        }
-
+        optionsBuilder.UseSqlServer(conn);
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //modelBuilder.ApplyConfiguration(new HamburguerConfiguration());
+        //modelBuilder.ApplyConfiguration(new MarcaConfiguration());
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(HamburguerDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
+    }
+
 }
