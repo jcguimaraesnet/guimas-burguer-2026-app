@@ -19,9 +19,9 @@ namespace GuimasBurguer2026App.Data
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            string conn = config.GetConnectionString("MyDb");
+            string conn = config.GetConnectionString("MyDbSqlite");
 
-            optionsBuilder.UseSqlServer(conn);
+            optionsBuilder.UseSqlite(conn);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
