@@ -65,7 +65,7 @@ public class HamburguerService : IHamburguerService
         _hamburguers.Add(hamburguer);
     }
 
-    public void Alterar(Hamburguer hamburguerAlterado)
+    public void Salvar(Hamburguer hamburguerAlterado)
     {
         var hamburguerExistente = Obter(hamburguerAlterado.HamburguerId);
         hamburguerExistente.Nome = hamburguerAlterado.Nome;

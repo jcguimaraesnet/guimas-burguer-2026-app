@@ -13,17 +13,8 @@ public class HamburguerService : IHamburguerService
         _context = context;
     }
 
-    public void Alterar(Hamburguer hamburguer)
+    public void Salvar(Hamburguer hamburguer)
     {
-        var hamburguerExistente = Obter(hamburguer.HamburguerId);
-        hamburguerExistente.Nome = hamburguer.Nome;
-        hamburguerExistente.Descricao = hamburguer.Descricao;
-        hamburguerExistente.Preco = hamburguer.Preco;
-        hamburguerExistente.EntregaExpressa = hamburguer.EntregaExpressa;
-        hamburguerExistente.DataCadastro = hamburguer.DataCadastro;
-        hamburguerExistente.ImagemUri = hamburguer.ImagemUri;
-        hamburguerExistente.MarcaId = hamburguer.MarcaId;
-
         _context.SaveChanges();
     }
 

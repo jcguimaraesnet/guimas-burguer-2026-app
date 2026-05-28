@@ -29,16 +29,26 @@ namespace GuimasBurguer2026App.Pages
                                                 nameof(Marca.Nome));
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
+            Hamburguer = _service.Obter(id);
+            if (Hamburguer == null) return NotFound();
+
+            if (await TryUpdateModelAsync(Hamburguer, nameof(Hamburguer),
+                    h => h.Nome,
+                    h => h.Descricao,
+                    h => h.Preco,
+                    h => h.EntregaExpressa,
+                    h => h.DataCadastro,
+                    h => h.ImagemUri,
+                    h => h.MarcaId))
             {
-                return Page();
+                _service.Salvar(Hamburguer);
+                return RedirectToPage("/Index");
             }
 
-            _service.Alterar(Hamburguer);
-
-            return RedirectToPage("/Index");
+            CarregarMarcas();
+            return Page();
         }
 
         public IActionResult OnPostDelete()
@@ -47,6 +57,13 @@ namespace GuimasBurguer2026App.Pages
 
             _service.Excluir(Hamburguer.HamburguerId);
             return RedirectToPage("/Index");
+        }
+
+        public void CarregarMarcas()
+        {
+            MarcaOptionItems = new SelectList(_service.ObterTodasMarcas(),
+                                                nameof(Marca.MarcaId),
+                                                nameof(Marca.Nome));
         }
     }
 }
