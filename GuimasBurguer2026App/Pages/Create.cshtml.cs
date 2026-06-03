@@ -13,6 +13,11 @@ namespace GuimasBurguer2026App.Pages
         public Hamburguer Hamburguer { get; set; }
         public SelectList MarcaOptionItems { get; set; }
 
+        public SelectList CategoriaOptionItems { get; set; }
+
+        [BindProperty]
+        public IList<int>? CategoriaId { get; set; }
+
         private IHamburguerService _service;
 
         public CreateModel(IHamburguerService service)
@@ -26,6 +31,9 @@ namespace GuimasBurguer2026App.Pages
                                                 nameof(Marca.MarcaId),
                                                 nameof(Marca.Nome));
 
+            CategoriaOptionItems = new SelectList(_service.ObterTodasCategorias(),
+                                                nameof(Categoria.CategoriaId),
+                                                nameof(Categoria.Descricao));
         }
 
         public IActionResult OnPost()
@@ -39,6 +47,10 @@ namespace GuimasBurguer2026App.Pages
             {
                 return Page();
             }
+
+            Hamburguer.Categorias = _service.ObterTodasCategorias()
+                    .Where(item => CategoriaId.Contains(item.CategoriaId))
+                    .ToList();
 
             _service.Incluir(Hamburguer);
 

@@ -3,6 +3,7 @@ using System;
 using GuimasBurguer2026App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,27 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GuimasBurguer2026App.Data.Migrations
 {
     [DbContext(typeof(HamburguerDbContext))]
-    partial class HamburguerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260528121149_AddDataSeedCategoria")]
+    partial class AddDataSeedCategoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.16");
-
-            modelBuilder.Entity("CategoriaHamburguer", b =>
-                {
-                    b.Property<int>("CategoriasCategoriaId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("HamburguersHamburguerId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("CategoriasCategoriaId", "HamburguersHamburguerId");
-
-                    b.HasIndex("HamburguersHamburguerId");
-
-                    b.ToTable("CategoriaHamburguer");
-                });
 
             modelBuilder.Entity("GuimasBurguer2026App.Models.Categoria", b =>
                 {
@@ -127,21 +115,6 @@ namespace GuimasBurguer2026App.Data.Migrations
                             MarcaId = 2,
                             Nome = "Seara"
                         });
-                });
-
-            modelBuilder.Entity("CategoriaHamburguer", b =>
-                {
-                    b.HasOne("GuimasBurguer2026App.Models.Categoria", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriasCategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GuimasBurguer2026App.Models.Hamburguer", null)
-                        .WithMany()
-                        .HasForeignKey("HamburguersHamburguerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

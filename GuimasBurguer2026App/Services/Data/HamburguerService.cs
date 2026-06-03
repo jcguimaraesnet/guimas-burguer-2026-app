@@ -35,6 +35,7 @@ public class HamburguerService : IHamburguerService
     public Hamburguer Obter(int id)
     {
         return _context.Hamburguer
+            .Include(item => item.Categorias)
             .SingleOrDefault(item => item.HamburguerId == id);
     }
 
@@ -69,5 +70,10 @@ public class HamburguerService : IHamburguerService
     public IList<Hamburguer> ObterTodos()
     {
         return _context.Hamburguer.ToList();
+    }
+
+    public IList<Categoria> ObterTodasCategorias()
+    {
+        return _context.Categoria.ToList();
     }
 }

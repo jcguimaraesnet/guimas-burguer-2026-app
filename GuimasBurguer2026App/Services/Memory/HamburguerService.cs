@@ -85,11 +85,45 @@ public class HamburguerService : IHamburguerService
 
     public IList<Marca> ObterTodasMarcas()
     {
-        throw new NotImplementedException();
+        return new List<Marca>()
+            {
+                new Marca
+                {
+                    MarcaId = 1,
+                    Nome = "Sadia"
+                },
+                new Marca
+                {
+                    MarcaId = 2,
+                    Nome = "Seara"
+                },
+            };
     }
 
     public IList<Hamburguer> ObterComFiltro(string nome, string descricao)
     {
         throw new NotImplementedException();
+    }
+
+    public IList<Categoria> ObterTodasCategorias()
+    {
+        return new List<Categoria>()
+            {
+                new Categoria
+                {
+                    CategoriaId = 1,
+                    Descricao = "Light"
+                },
+                new Categoria
+                {
+                    CategoriaId = 2,
+                    Descricao = "Vegano"
+                },
+                new Categoria
+                {
+                    CategoriaId = 3,
+                    Descricao = "Calórico"
+                },
+            };
     }
 }

@@ -10,6 +10,7 @@ namespace GuimasBurguer2026App.Services
         void Salvar(Hamburguer hamburguer);
         void Excluir(int id);
         IList<Marca> ObterTodasMarcas();
+        IList<Categoria> ObterTodasCategorias();
         IList<Hamburguer> ObterComFiltro(string nome, string descricao);
     }
 }
