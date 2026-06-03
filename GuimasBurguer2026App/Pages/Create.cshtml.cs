@@ -1,5 +1,6 @@
 using GuimasBurguer2026App.Models;
 using GuimasBurguer2026App.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +8,7 @@ using System.Runtime.ConstrainedExecution;
 
 namespace GuimasBurguer2026App.Pages
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         [BindProperty]
