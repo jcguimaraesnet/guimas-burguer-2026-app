@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NToastNotify;
 using System.Runtime.ConstrainedExecution;
 
 namespace GuimasBurguer2026App.Pages
@@ -20,11 +21,13 @@ namespace GuimasBurguer2026App.Pages
         [BindProperty]
         public IList<int>? CategoriaId { get; set; }
 
+        private IToastNotification _toastNotification;
         private IHamburguerService _service;
 
-        public CreateModel(IHamburguerService service)
+        public CreateModel(IHamburguerService service, IToastNotification toastNotification)
         {
             _service = service;
+            _toastNotification = toastNotification;
         }
 
         public void OnGet()
@@ -55,6 +58,8 @@ namespace GuimasBurguer2026App.Pages
                     .ToList();
 
             _service.Incluir(Hamburguer);
+
+            _toastNotification.AddSuccessToastMessage("Hamburguer criado com sucesso!");
 
             return RedirectToPage("/Index");
         }

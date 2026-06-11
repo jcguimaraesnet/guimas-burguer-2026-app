@@ -3,6 +3,7 @@ using GuimasBurguer2026App.Services;
 using GuimasBurguer2026App.Services.Memory;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 
 namespace GuimasBurguer2026App
 {
@@ -12,6 +13,18 @@ namespace GuimasBurguer2026App
         {
             var builder = WebApplication.CreateBuilder(args);
             //var connectionString = builder.Configuration.GetConnectionString("HamburguerDbContextConnection") ?? throw new InvalidOperationException("Connection string 'HamburguerDbContextConnection' not found.");;
+
+            //Program.cs
+            builder.Services
+                .AddRazorPages()
+                .AddNToastNotifyToastr(new NToastNotify.ToastrOptions()
+                {
+                    ProgressBar = true,
+                    PositionClass = ToastPositions.BottomRight,
+                    TimeOut = 5000,
+                    PreventDuplicates = true,
+                });
+
 
             // Add services to the container.
             builder.Services.AddRazorPages();
